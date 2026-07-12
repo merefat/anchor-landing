@@ -1,9 +1,8 @@
 'use client';
 
-import { useRef, useMemo } from 'react';
+import { useRef, useMemo, useState, useEffect } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { Float, Environment } from '@react-three/drei';
-import { useTheme } from '@/hooks/useTheme';
 import * as THREE from 'three';
 
 const TEAL = '#1ebbd4';
@@ -128,8 +127,17 @@ function AnchorGroup({ pointer, roughnessOverride }) {
 
 export default function AnchorRibbon({ className = '' }) {
   const pointerRef = useRef({ x: 0, y: 0 });
-  const theme = useTheme();
-  const isLight = theme === 'light';
+  const [isLight, setIsLight] = useState(false);
+
+  useEffect(() => {
+    const checkTheme = () => {
+      setIsLight(document.documentElement.getAttribute('data-theme') === 'light');
+    };
+    checkTheme();
+    const observer = new MutationObserver(checkTheme);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <div

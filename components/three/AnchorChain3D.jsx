@@ -1,9 +1,8 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Float } from '@react-three/drei';
-import { useTheme } from '@/hooks/useTheme';
 import * as THREE from 'three';
 
 const TEAL = new THREE.Color('#1ebbd4');
@@ -74,8 +73,17 @@ export default function AnchorChain3D({
   rotationSpeed = 0.3,
   className = '',
 }) {
-  const theme = useTheme();
-  const isLight = theme === 'light';
+  const [isLight, setIsLight] = useState(false);
+
+  useEffect(() => {
+    const checkTheme = () => {
+      setIsLight(document.documentElement.getAttribute('data-theme') === 'light');
+    };
+    checkTheme();
+    const observer = new MutationObserver(checkTheme);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <div className={className} style={{ pointerEvents: 'none' }}>

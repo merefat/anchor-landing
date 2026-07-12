@@ -1,9 +1,8 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { MeshDistortMaterial, Float } from '@react-three/drei';
-import { useTheme } from '@/hooks/useTheme';
 import * as THREE from 'three';
 
 const TEAL = new THREE.Color('#1ebbd4');
@@ -48,8 +47,17 @@ function Orb({ thinking = true }) {
 }
 
 export default function AiOrb({ thinking = true, className = '' }) {
-  const theme = useTheme();
-  const isLight = theme === 'light';
+  const [isLight, setIsLight] = useState(false);
+
+  useEffect(() => {
+    const checkTheme = () => {
+      setIsLight(document.documentElement.getAttribute('data-theme') === 'light');
+    };
+    checkTheme();
+    const observer = new MutationObserver(checkTheme);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    return () => observer.disconnect();
+  }, []);
   return (
     <div className={className}>
       <Canvas camera={{ position: [0, 0, 4], fov: 50 }} dpr={[1, 2]} gl={{ alpha: true }}>

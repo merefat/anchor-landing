@@ -1,8 +1,7 @@
 'use client';
 
-import { useRef, useMemo } from 'react';
+import { useRef, useMemo, useState, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { useIsLight } from '@/hooks/useTheme';
 import * as THREE from 'three';
 
 const TEAL = '#1ebbd4';
@@ -110,7 +109,17 @@ function Particles({ count = 200, isLight = false }) {
 }
 
 export default function ParticleField({ className = '', count = 200 }) {
-  const isLight = useIsLight();
+  const [isLight, setIsLight] = useState(false);
+
+  useEffect(() => {
+    const checkTheme = () => {
+      setIsLight(document.documentElement.getAttribute('data-theme') === 'light');
+    };
+    checkTheme();
+    const observer = new MutationObserver(checkTheme);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    return () => observer.disconnect();
+  }, []);
   return (
     <div className={className} style={{ pointerEvents: 'none' }}>
       <Canvas camera={{ position: [0, 0, 5], fov: 60 }} dpr={[1, 2]} gl={{ alpha: true }}>
