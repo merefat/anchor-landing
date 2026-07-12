@@ -1,0 +1,369 @@
+.liveSystem {
+  --amber: #f89c11;
+  --teal: #1ebbd4;
+  --amber-soft: rgba(248, 156, 17, 0.35);
+  --teal-soft: rgba(30, 187, 212, 0.35);
+
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", sans-serif;
+}
+
+.liveSystem[data-theme="dark"] {
+  --bg-0: #05070c;
+  --panel: rgba(255, 255, 255, 0.045);
+  --panel-border: rgba(255, 255, 255, 0.09);
+  --text-1: #f5f7fa;
+  --text-2: rgba(245, 247, 250, 0.5);
+  --text-3: rgba(245, 247, 250, 0.32);
+  --ring-track: rgba(255, 255, 255, 0.08);
+  --specular: rgba(255, 255, 255, 0.1);
+  --shadow: rgba(0, 0, 0, 0.6);
+  --core-fill: rgba(255, 255, 255, 0.06);
+}
+
+.liveSystem[data-theme="light"] {
+  --bg-0: #eef1f5;
+  --panel: rgba(255, 255, 255, 0.55);
+  --panel-border: rgba(20, 25, 35, 0.08);
+  --text-1: #12151c;
+  --text-2: rgba(18, 21, 28, 0.55);
+  --text-3: rgba(18, 21, 28, 0.38);
+  --ring-track: rgba(20, 25, 35, 0.1);
+  --specular: rgba(255, 255, 255, 0.6);
+  --shadow: rgba(30, 40, 60, 0.18);
+  --core-fill: rgba(20, 25, 35, 0.03);
+}
+
+.themeToggle {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px 6px 10px;
+  border-radius: 999px;
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  cursor: pointer;
+  color: var(--text-1);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  user-select: none;
+  z-index: 10;
+}
+
+.themeToggle .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--teal);
+  box-shadow: 0 0 8px var(--teal-soft);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.liveSystem[data-theme="light"] .themeToggle .dot {
+  background: var(--amber);
+  box-shadow: 0 0 8px var(--amber-soft);
+}
+
+.scene {
+  perspective: 1200px;
+}
+
+.card {
+  position: relative;
+  width: 440px;
+  max-width: 90vw;
+  aspect-ratio: 1 / 1;
+  border-radius: 28px;
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  backdrop-filter: blur(22px) saturate(180%);
+  -webkit-backdrop-filter: blur(22px) saturate(180%);
+  box-shadow: 0 30px 60px -20px var(--shadow), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: transform 0.12s ease-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.specular {
+  position: absolute;
+  inset: 0;
+  border-radius: 28px;
+  pointer-events: none;
+  background: radial-gradient(220px circle at var(--mx, 50%) var(--my, 50%), var(--specular), transparent 60%);
+  mix-blend-mode: screen;
+}
+
+.liveSystem[data-theme="light"] .specular {
+  mix-blend-mode: soft-light;
+}
+
+.faceWrap {
+  position: relative;
+  width: 80%;
+  aspect-ratio: 1 / 1;
+  transform: translateZ(40px);
+}
+
+.faceWrap svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.track {
+  fill: none;
+  stroke: var(--ring-track);
+  stroke-width: 1.4;
+}
+
+.progressArc {
+  fill: none;
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  transform: rotate(-90deg);
+  transform-origin: 100px 100px;
+  transition: stroke-dashoffset 1s linear;
+  filter: drop-shadow(0 0 6px var(--teal-soft));
+}
+
+.anchor {
+  transition: r 0.4s ease, filter 0.4s ease;
+}
+
+.anchor.amber {
+  fill: var(--amber);
+  filter: drop-shadow(0 0 5px var(--amber-soft));
+}
+
+.anchor.teal {
+  fill: var(--teal);
+  filter: drop-shadow(0 0 5px var(--teal-soft));
+}
+
+.anchor.active {
+  r: 4.6;
+}
+
+.anchor.active.amber {
+  filter: drop-shadow(0 0 10px var(--amber-soft)) drop-shadow(0 0 20px var(--amber-soft));
+}
+
+.anchor.active.teal {
+  filter: drop-shadow(0 0 10px var(--teal-soft)) drop-shadow(0 0 20px var(--teal-soft));
+}
+
+.orbit {
+  transform-origin: 100px 100px;
+}
+
+.orbitA {
+  animation: spin 7s linear infinite;
+}
+
+.orbitB {
+  animation: spin 11s linear infinite reverse;
+}
+
+.orbitC {
+  animation: spin 15.5s linear infinite;
+}
+
+.particle.amber {
+  fill: var(--amber);
+  filter: drop-shadow(0 0 4px var(--amber-soft));
+}
+
+.particle.teal {
+  fill: var(--teal);
+  filter: drop-shadow(0 0 4px var(--teal-soft));
+}
+
+.pulseLine {
+  stroke-width: 1;
+  stroke-dasharray: 3 5;
+  opacity: 0;
+  animation: pulseLine 4s ease-in-out infinite;
+}
+
+.pulseLine.amber {
+  stroke: var(--amber);
+}
+
+.pulseLine.teal {
+  stroke: var(--teal);
+}
+
+.coreRing {
+  fill: none;
+  stroke: var(--ring-track);
+  stroke-width: 1;
+}
+
+.coreFill {
+  fill: var(--core-fill);
+}
+
+.coreHub {
+  fill: url(#hubGradient);
+  filter: drop-shadow(0 0 10px var(--amber-soft)) drop-shadow(0 0 16px var(--teal-soft));
+  animation: breathe 2.6s ease-in-out infinite;
+  transform-origin: 100px 100px;
+}
+
+.heartbeatRing {
+  fill: none;
+  stroke: var(--teal);
+  stroke-width: 1.2;
+  opacity: 0;
+  transform-origin: 100px 100px;
+}
+
+.heartbeatRing.fire {
+  animation: heartbeat 1s ease-out;
+}
+
+.innerOrbit {
+  animation: spin 5s linear infinite;
+  transform-origin: 100px 100px;
+}
+
+.innerNode {
+  fill: var(--teal);
+  opacity: 0.7;
+}
+
+.readout {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) translateZ(60px);
+  text-align: center;
+  pointer-events: none;
+  z-index: 4;
+  width: 60%;
+}
+
+.timeText {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  color: var(--text-1);
+  text-shadow: 0 0 24px color-mix(in srgb, var(--teal) 20%, transparent);
+  font-variant-numeric: tabular-nums;
+}
+
+.progressText {
+  margin-top: 3px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, var(--amber), var(--teal));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.footer {
+  position: absolute;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%) translateZ(30px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  z-index: 4;
+}
+
+.brandRow {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 10.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-2);
+}
+
+.brandRow .glyph {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--amber), var(--teal));
+}
+
+.liveDot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--teal);
+  box-shadow: 0 0 6px var(--teal-soft);
+  animation: livePulse 2s ease-in-out infinite;
+}
+
+.statusText {
+  font-size: 10px;
+  color: var(--text-3);
+  letter-spacing: 0.02em;
+  height: 14px;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.statusText.show {
+  opacity: 1;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulseLine {
+  0% { opacity: 0; stroke-dashoffset: 16; }
+  12% { opacity: 0.55; }
+  28% { opacity: 0; stroke-dashoffset: 0; }
+  100% { opacity: 0; }
+}
+
+@keyframes breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.14); }
+}
+
+@keyframes heartbeat {
+  0% { opacity: 0.6; transform: scale(1); }
+  100% { opacity: 0; transform: scale(2.1); }
+}
+
+@keyframes livePulse {
+  0%, 100% { opacity: 0.4; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .anchor,
+  .coreHub,
+  .orbitA,
+  .orbitB,
+  .orbitC,
+  .innerOrbit,
+  .liveDot {
+    animation: none !important;
+    transition: none !important;
+  }
+}
