@@ -277,3 +277,54 @@ export function CyberScene({ children, cameraPosition = [0, 0, 5] }) {
     </Canvas>
   );
 }
+
+// Lightweight Canvas wrapper for individual shapes (no OrbitControls, minimal lights)
+function ShapeCanvas({ children, className = '' }) {
+  return (
+    <div className={className} style={{ width: '100%', height: '100%', pointerEvents: 'none' }}>
+      <Canvas
+        camera={{ position: [0, 0, 3], fov: 50 }}
+        dpr={[1, 2]}
+        gl={{ alpha: true }}
+      >
+        <ambientLight intensity={0.5} />
+        <pointLight position={[5, 5, 5]} intensity={0.8} />
+        <pointLight position={[-5, -5, 5]} intensity={0.6} />
+        {children}
+      </Canvas>
+    </div>
+  );
+}
+
+// Canvas-wrapped exports for use outside of existing Canvas contexts
+export function NeonCubeCanvas({ color = '#00f0ff', scale = 1, className = '' }) {
+  return (
+    <ShapeCanvas className={className}>
+      <NeonCube color={color} scale={scale} />
+    </ShapeCanvas>
+  );
+}
+
+export function NeonSphereCanvas({ color = '#ffaa00', scale = 1, className = '' }) {
+  return (
+    <ShapeCanvas className={className}>
+      <NeonSphere color={color} scale={scale} />
+    </ShapeCanvas>
+  );
+}
+
+export function NeonTorusCanvas({ color = '#a855f7', scale = 1, className = '' }) {
+  return (
+    <ShapeCanvas className={className}>
+      <NeonTorus color={color} scale={scale} />
+    </ShapeCanvas>
+  );
+}
+
+export function NeonIcosahedronCanvas({ color = '#00f0ff', scale = 1, className = '' }) {
+  return (
+    <ShapeCanvas className={className}>
+      <NeonIcosahedron color={color} scale={scale} />
+    </ShapeCanvas>
+  );
+}

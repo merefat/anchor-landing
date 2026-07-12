@@ -2,38 +2,7 @@
 
 import { memo } from 'react';
 import { motion } from 'motion/react';
-import dynamic from 'next/dynamic';
-import { useIsMobile } from '@/hooks/useIsMobile';
-import { useReducedMotion } from '@/hooks/useReducedMotion';
 import { Brain, Wallet, Zap, Users, Cpu } from 'lucide-react';
-
-const DynamicNeonCube = dynamic(
-  () => import('@/components/three/Cyber3DLibrary').then(mod => ({ default: mod.NeonCube })),
-  { ssr: false, loading: () => null }
-);
-
-const DynamicNeonSphere = dynamic(
-  () => import('@/components/three/Cyber3DLibrary').then(mod => ({ default: mod.NeonSphere })),
-  { ssr: false, loading: () => null }
-);
-
-const DynamicNeonTorus = dynamic(
-  () => import('@/components/three/Cyber3DLibrary').then(mod => ({ default: mod.NeonTorus })),
-  { ssr: false, loading: () => null }
-);
-
-const DynamicNeonIcosahedron = dynamic(
-  () => import('@/components/three/Cyber3DLibrary').then(mod => ({ default: mod.NeonIcosahedron })),
-  { ssr: false, loading: () => null }
-);
-
-const threeDComponentMap = {
-  plan: DynamicNeonCube,
-  budget: DynamicNeonSphere,
-  habits: DynamicNeonTorus,
-  family: DynamicNeonIcosahedron,
-  ai: DynamicNeonCube,
-};
 
 const features = [
   {
@@ -83,9 +52,8 @@ const features = [
   }
 ];
 
-const FeatureCard = memo(function FeatureCard({ feature, index, showThreeD }) {
+const FeatureCard = memo(function FeatureCard({ feature, index }) {
   const isLarge = feature.size === 'large';
-  const ThreeDComponent = threeDComponentMap[feature.id] || DynamicNeonCube;
   const Icon = feature.icon;
 
   return (
@@ -101,13 +69,6 @@ const FeatureCard = memo(function FeatureCard({ feature, index, showThreeD }) {
       }}
       whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
     >
-      {/* 3D Element */}
-      {showThreeD && (
-        <div className="absolute inset-0 z-0 opacity-20 group-hover:opacity-30 transition-opacity">
-          <ThreeDComponent color={feature.color} scale={isLarge ? 1.5 : 1} />
-        </div>
-      )}
-
       {/* Content */}
       <div className="relative z-10 h-full flex flex-col justify-between">
         <div>
@@ -153,9 +114,6 @@ const FeatureCard = memo(function FeatureCard({ feature, index, showThreeD }) {
 });
 
 export default function FeaturesBento() {
-  const isMobile = useIsMobile();
-  const reducedMotion = useReducedMotion();
-  const showThreeD = !reducedMotion && !isMobile;
 
   return (
     <section 
@@ -190,7 +148,7 @@ export default function FeaturesBento() {
         {/* Bento Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-[200px]">
           {features.map((feature, index) => (
-            <FeatureCard key={feature.id} feature={feature} index={index} showThreeD={showThreeD} />
+            <FeatureCard key={feature.id} feature={feature} index={index} />
           ))}
         </div>
       </div>
