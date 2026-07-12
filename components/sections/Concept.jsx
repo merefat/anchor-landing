@@ -22,7 +22,7 @@ export default function Concept() {
       <AnchorRipple />
       {/* Gradient orbs */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full blur-3xl opacity-10 pointer-events-none" style={{ background: 'var(--anchor-orange-glow)' }} />
-      <div className="max-w-6xl mx-auto section-padding">
+      <div className="relative z-10 max-w-6xl mx-auto section-padding">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left: Copy */}
           <motion.div
@@ -55,7 +55,7 @@ export default function Concept() {
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, margin: '-100px' }}
+            viewport={{ once: true, amount: 0.1 }}
             transition={{ duration: 0.8, ease: [0.19, 1, 0.22, 1] }}
             className="flex justify-center"
           >

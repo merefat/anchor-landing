@@ -10,7 +10,6 @@
   justify-content: center;
   font-family: 'Sora', system-ui, -apple-system, sans-serif;
   transition: background 0.5s ease;
-  overflow: hidden;
 }
 
 .anchor-scene[data-theme='dark'] {
@@ -130,7 +129,7 @@
   background: var(--ring-track);
   top: 2px;
   left: 50%;
-  transform-origin: 50% calc(50vw);
+  transform-origin: 50% 50%;
 }
 
 /* ---------- clock hands ---------- */
@@ -349,6 +348,50 @@
     width: 100%;
     max-width: 380px;
     border-radius: 24px;
+    transform-style: flat;
+    transform: none !important;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    will-change: auto;
+  }
+
+  .anchor-scene[data-theme='dark'] .anchor-card {
+    background: rgba(20, 25, 35, 0.85);
+  }
+
+  .anchor-scene[data-theme='light'] .anchor-card {
+    background: rgba(255, 255, 255, 0.9);
+  }
+
+  .anchor-scene-perspective {
+    perspective: none;
+    width: 100%;
+    max-width: 380px;
+  }
+
+  .specular {
+    display: none;
+  }
+
+  .face {
+    transform: none;
+  }
+
+  .readout {
+    transform: translate(-50%, -58%);
+  }
+
+  .brand {
+    transform: translateX(-50%);
+  }
+
+  /* Boost ring track visibility on small screens */
+  .anchor-scene[data-theme='dark'] {
+    --ring-track: rgba(255, 255, 255, 0.25);
+  }
+
+  .anchor-scene[data-theme='light'] {
+    --ring-track: rgba(20, 25, 35, 0.25);
   }
 
   .time-text {
@@ -367,5 +410,131 @@
   .brand {
     bottom: 22px;
     font-size: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .anchor-scene-perspective {
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .anchor-card {
+    width: 100%;
+    max-width: 320px;
+    border-radius: 20px;
+  }
+
+  .face {
+    width: 85%;
+  }
+
+  .time-text {
+    font-size: 12px;
+  }
+
+  .date-text {
+    font-size: 7.5px;
+  }
+
+  .activity-label {
+    font-size: 7px;
+    padding: 2px 4px;
+  }
+
+  .anchor {
+    width: 7px;
+    height: 7px;
+    margin: -3.5px 0 0 -3.5px;
+  }
+
+  .hand-hour {
+    width: 5px;
+    height: 22%;
+    margin-left: -2.5px;
+  }
+
+  .hand-minute {
+    width: 4px;
+    height: 30%;
+    margin-left: -2px;
+  }
+
+  .hand-second {
+    width: 2px;
+    height: 34%;
+    margin-left: -1px;
+  }
+
+  .hub {
+    width: 10px;
+    height: 10px;
+    margin: -5px 0 0 -5px;
+  }
+
+  .brand {
+    bottom: 18px;
+    font-size: 9px;
+  }
+}
+
+@media (max-width: 380px) {
+  .anchor-scene-perspective {
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .anchor-card {
+    width: 100%;
+    max-width: 280px;
+    border-radius: 18px;
+  }
+
+  .time-text {
+    font-size: 11px;
+  }
+
+  .date-text {
+    font-size: 7px;
+  }
+
+  .activity-label {
+    font-size: 6.5px;
+    padding: 1.5px 3px;
+  }
+
+  .anchor {
+    width: 6px;
+    height: 6px;
+    margin: -3px 0 0 -3px;
+  }
+
+  .hand-hour {
+    width: 4.5px;
+    height: 20%;
+    margin-left: -2.25px;
+  }
+
+  .hand-minute {
+    width: 3.5px;
+    height: 28%;
+    margin-left: -1.75px;
+  }
+
+  .hand-second {
+    width: 1.5px;
+    height: 32%;
+    margin-left: -0.75px;
+  }
+
+  .hub {
+    width: 9px;
+    height: 9px;
+    margin: -4.5px 0 0 -4.5px;
+  }
+
+  .brand {
+    bottom: 16px;
+    font-size: 8px;
   }
 }

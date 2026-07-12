@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef, useState, useEffect, useCallback } from 'react';
+import { useIsMobile } from '@/hooks/useIsMobile';
 
 const RADIUS = 42;
 
@@ -19,6 +20,7 @@ export default function AnchorSystemWidget() {
   const cardRef = useRef(null);
   const specularRef = useRef(null);
   const rafRef = useRef(null);
+  const isMobile = useIsMobile();
 
   const [time, setTime] = useState({ h: 0, m: 0, s: 0, h12: 0, label: '00:00 AM', date: '—' });
   const [theme, setTheme] = useState('dark');
@@ -61,6 +63,7 @@ export default function AnchorSystemWidget() {
   }, []);
 
   const handleMouseMove = useCallback((e) => {
+    if (isMobile) return;
     const card = cardRef.current;
     if (!card) return;
     const rect = card.getBoundingClientRect();
@@ -77,12 +80,13 @@ export default function AnchorSystemWidget() {
         specularRef.current.style.setProperty('--my', `${py * 100}%`);
       }
     });
-  }, []);
+  }, [isMobile]);
 
   const handleMouseLeave = useCallback(() => {
+    if (isMobile) return;
     const card = cardRef.current;
     if (card) card.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
-  }, []);
+  }, [isMobile]);
 
   const hourDeg = (time.h12 + time.m / 60) * 30;
   const minDeg = (time.m + time.s / 60) * 6;

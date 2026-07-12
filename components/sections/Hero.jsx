@@ -74,7 +74,7 @@ export default function Hero() {
       <div className="relative z-10 max-w-7xl mx-auto section-padding pt-24 sm:pt-32 pb-16 sm:pb-20 w-full">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-8 items-center" style={{ gridTemplateColumns: isMobile ? '1fr' : '0.55fr 0.45fr' }}>
           {/* Left: Copy */}
-          <div className="text-center lg:text-left">
+          <div className="text-center lg:text-left mb-8 lg:mb-0">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -126,30 +126,6 @@ export default function Hero() {
                 Try It Yourself
               </Button>
             </motion.div>
-
-            {/* Trust indicators */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-100px' }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="mt-12"
-            >
-              <div className="flex items-center gap-6 justify-center lg:justify-start text-sm" style={{ color: 'var(--anchor-text-muted)' }}>
-                <div className="flex items-center gap-2 glass-neon px-4 py-2 rounded-lg">
-                  <div className="w-2 h-2 rounded-full animate-pulse" style={{ background: 'var(--anchor-teal-neon)' }} />
-                  <span>10K+ Neural Links</span>
-                </div>
-                <div className="flex items-center gap-2 glass-neon px-4 py-2 rounded-lg">
-                  <div className="w-2 h-2 rounded-full animate-pulse" style={{ background: 'var(--anchor-orange-neon)' }} />
-                  <span>4.9 Sync Rating</span>
-                </div>
-                <div className="flex items-center gap-2 glass-neon px-4 py-2 rounded-lg">
-                  <div className="w-2 h-2 rounded-full animate-pulse" style={{ background: 'var(--anchor-teal-neon)' }} />
-                  <span>Quantum Security</span>
-                </div>
-              </div>
-            </motion.div>
           </div>
 
           {/* Right: Anchor App Phone with Auto Demo */}
@@ -157,10 +133,10 @@ export default function Hero() {
             initial={{ opacity: 0, scale: 0.92 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
-            className="relative h-[350px] sm:h-[400px] md:h-[500px] lg:h-[600px] flex items-center justify-center perspective-3d"
+            className="relative h-[500px] sm:h-[500px] md:h-[500px] lg:h-[600px] flex items-center justify-center perspective-3d"
           >
             {/* Auto-looping demo phone */}
-            <PhoneShell size="normal" tiltIntensity={0.8} label="Live Demo">
+            <PhoneShell size={isMobile ? 'small' : 'normal'} tiltIntensity={0.8} label="Live Demo">
               <DemoFlowPlayer reducedMotion={reducedMotion} />
             </PhoneShell>
           </motion.div>
