@@ -51,7 +51,7 @@ export default function Hero() {
               transition={{ duration: 0.6 }}
             >
               <Badge className="mb-6 glass-neon neon-border-teal">
-                <span className="neon-text-teal">NEW: AI-POWERED ORCHESTRATION</span>
+                <span className="gradient-text">NEW: AI-POWERED ORCHESTRATION</span>
               </Badge>
             </motion.div>
 
@@ -63,11 +63,11 @@ export default function Hero() {
               className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold leading-tight mb-6"
               style={{ color: 'var(--anchor-text)' }}
             >
-              <span className="neon-text-teal">Your Life,</span>
+              <span className="gradient-text">Your Life,</span>
               <br />
-              <span className="neon-text-teal">Orchestrated</span>
+              <span className="gradient-text">Orchestrated</span>
               <br />
-              <span className="neon-text-orange">by AI</span>
+              <span className="gradient-text">by AI</span>
             </motion.h1>
 
             <motion.p
