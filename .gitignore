@@ -42,3 +42,15 @@ next-env.d.ts
 
 # OS
 Thumbs.db
+
+# AI/Development tools
+.windsurf/
+.devin/
+
+# Logs
+logs
+*.log
+
+# Temporary files
+tmp/
+temp/
