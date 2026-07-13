@@ -201,10 +201,6 @@ export default function ContactDemo() {
                   >
                     {isSubmitting ? 'Submitting...' : 'Start Free'}
                   </Button>
-
-                  <p className="text-xs text-anchor-text-muted text-center">
-                    No credit card required. Start your journey today.
-                  </p>
                 </form>
               )}
             </Glass>
