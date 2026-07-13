@@ -118,8 +118,8 @@ export default function AnchorSystemWidget() {
             {/* Anchor dots */}
             {ANCHOR_DOTS.map((i) => {
               const angle = (i * 30 - 90) * (Math.PI / 180);
-              const x = 50 + RADIUS * Math.cos(angle);
-              const y = 50 + RADIUS * Math.sin(angle);
+              const x = (50 + RADIUS * Math.cos(angle)).toFixed(4);
+              const y = (50 + RADIUS * Math.sin(angle)).toFixed(4);
               const activity = ACTIVITIES.find((a) => a.hour === i);
               const colorClass = activity
                 ? activity.color
@@ -139,8 +139,8 @@ export default function AnchorSystemWidget() {
             {/* Activity labels */}
             {ACTIVITIES.map((activity) => {
               const angle = (activity.hour * 30 - 90) * (Math.PI / 180);
-              const x = 50 + (RADIUS + 12) * Math.cos(angle);
-              const y = 50 + (RADIUS + 12) * Math.sin(angle);
+              const x = (50 + (RADIUS + 12) * Math.cos(angle)).toFixed(4);
+              const y = (50 + (RADIUS + 12) * Math.sin(angle)).toFixed(4);
               return (
                 <div
                   key={`label-${activity.hour}`}

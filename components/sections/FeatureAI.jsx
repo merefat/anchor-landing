@@ -10,15 +10,6 @@ import { useReducedMotion } from '@/hooks/useReducedMotion';
 import { useTilt, useParallax } from '@/hooks/useParallax';
 import { RotateCcw, Send } from 'lucide-react';
 
-const DynamicAiOrb = dynamic(
-  () => import('@/components/three/AiOrb'),
-  { ssr: false, loading: () => null }
-);
-
-const DynamicAnchorChain3D = dynamic(
-  () => import('@/components/three/AnchorChain3D'),
-  { ssr: false, loading: () => null }
-);
 
 const scenarios = [
   {
@@ -227,19 +218,6 @@ export default function FeatureAI() {
 
   return (
     <section ref={sectionRef} id="feature-ai" className="relative py-32 overflow-hidden cyber-grid scanlines" style={{ background: 'var(--anchor-base)' }}>
-      {/* 3D Anchor Chain background */}
-      {!reducedMotion && (
-        <div className="absolute inset-0 z-0">
-          <ErrorBoundary fallback={null}>
-            <DynamicAnchorChain3D
-              linkCount={4}
-              linkSize={0.5}
-              rotationSpeed={0.4}
-              className="absolute inset-0 w-full h-full opacity-25"
-            />
-          </ErrorBoundary>
-        </div>
-      )}
       {/* Gradient orbs */}
       <motion.div
         animate={{ opacity: [0.08, 0.15, 0.08], scale: [1, 1.2, 1] }}
@@ -315,13 +293,7 @@ export default function FeatureAI() {
               {/* Chat header with replay button */}
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 relative">
-                  {!reducedMotion && phase === 'thinking' ? (
-                    <ErrorBoundary fallback={null}>
-                      <DynamicAiOrb thinking={true} className="w-full h-full" />
-                    </ErrorBoundary>
-                  ) : (
-                    <div className="w-full h-full rounded-full gradient-bg animate-pulse-glow" />
-                  )}
+                  <div className="w-full h-full rounded-full gradient-bg animate-pulse-glow" />
                 </div>
                 <div className="flex-1">
                   <div className="text-sm font-semibold text-anchor-text">Anchor AI</div>

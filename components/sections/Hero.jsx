@@ -11,15 +11,6 @@ import { useIsMobile } from '@/hooks/useIsMobile';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 import { useParallaxTilt } from '@/hooks/useParallaxTilt';
 
-const DynamicLifeOrbit = dynamic(
-  () => import('@/components/three/LifeOrbit'),
-  { ssr: false, loading: () => null }
-);
-
-const DynamicAnchorChain3D = dynamic(
-  () => import('@/components/three/AnchorChain3D'),
-  { ssr: false, loading: () => null }
-);
 
 export default function Hero() {
   const isMobile = useIsMobile();
@@ -34,28 +25,6 @@ export default function Hero() {
         background: 'var(--anchor-base)'
       }}
     >
-      {/* Life Orbit background */}
-      {!reducedMotion && (
-        <div className="absolute inset-0 z-0">
-          <ErrorBoundary fallback={null}>
-            <DynamicLifeOrbit />
-          </ErrorBoundary>
-        </div>
-      )}
-
-      {/* 3D Anchor Chain background */}
-      {!reducedMotion && (
-        <div className="absolute inset-0 z-0">
-          <ErrorBoundary fallback={null}>
-            <DynamicAnchorChain3D
-              linkCount={7}
-              linkSize={0.8}
-              rotationSpeed={0.2}
-              className="absolute inset-0 w-full h-full opacity-40"
-            />
-          </ErrorBoundary>
-        </div>
-      )}
 
       {/* Gradient orbs */}
       <motion.div

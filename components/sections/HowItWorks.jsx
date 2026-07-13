@@ -3,7 +3,6 @@
 import { useRef, memo, useCallback } from 'react';
 import { motion } from 'motion/react';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
-import DataStreams from '@/components/three/DataStreams';
 
 const steps = [
   {
@@ -55,8 +54,6 @@ export default function HowItWorks() {
             backgroundSize: '50px 50px',
           }}
         />
-        {/* Data streams animation */}
-        <DataStreams />
       </div>
 
       {/* Heading */}

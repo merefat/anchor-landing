@@ -12,6 +12,12 @@ const footerLinks = {
   ],
 };
 
+const legalLinks = [
+  { label: 'Privacy Policy', href: '/privacy' },
+  { label: 'Terms of Service', href: '/terms' },
+  { label: 'Refund Policy', href: '/refund' },
+];
+
 export default function Footer() {
   return (
     <footer className="relative border-t border-anchor-border py-16" style={{ background: 'var(--anchor-surface)' }}>
@@ -80,6 +86,23 @@ export default function Footer() {
               </div>
             ))}
 
+            {/* Legal Links */}
+            <div>
+              <h4 className="text-sm font-semibold text-anchor-text mb-4">Legal</h4>
+              <ul className="space-y-2.5">
+                {legalLinks.map((link) => (
+                  <li key={link.label}>
+                    <a
+                      href={link.href}
+                      className="text-sm text-anchor-text-muted hover:text-anchor-text transition-colors"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
             {/* Social Links */}
             <div>
               <h4 className="text-sm font-semibold text-anchor-text mb-4">Connect</h4>
@@ -117,6 +140,7 @@ export default function Footer() {
             <span className="text-xs text-anchor-text-muted">All systems operational</span>
           </div>
         </div>
+
       </div>
     </footer>
   );

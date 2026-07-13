@@ -6,10 +6,6 @@ import { motion } from 'motion/react';
 import AnchorSystemWidget from '@/components/ui/AnchorSystemWidget';
 import '@/components/ui/anchor-system.css';
 
-const AnchorRipple = dynamic(
-  () => import('@/components/three/AnchorRipple'),
-  { ssr: false, loading: () => null }
-);
 
 // Clock widget with 3D visualization - updated
 
@@ -18,8 +14,6 @@ export default function Concept() {
 
   return (
     <section ref={sectionRef} className="relative py-32 overflow-hidden cyber-grid scanlines" style={{ background: 'var(--anchor-base)' }}>
-      {/* Anchor ripple background */}
-      <AnchorRipple />
       {/* Gradient orbs */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full blur-3xl opacity-10 pointer-events-none" style={{ background: 'var(--anchor-orange-glow)' }} />
       <div className="relative z-10 max-w-6xl mx-auto section-padding">

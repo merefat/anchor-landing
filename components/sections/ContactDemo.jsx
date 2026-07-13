@@ -118,18 +118,6 @@ export default function ContactDemo() {
                 );
               })}
             </div>
-
-            <div className="flex items-center gap-2 text-sm text-anchor-text-muted">
-              <div className="flex -space-x-2">
-                {[1, 2, 3, 4].map((i) => (
-                  <div
-                    key={i}
-                    className="w-8 h-8 rounded-full bg-gradient-to-br from-anchor-teal to-anchor-orange border-2 border-anchor-base"
-                  />
-                ))}
-              </div>
-              <span>Trusted by 500+ teams worldwide</span>
-            </div>
           </motion.div>
 
           {/* Right Column - Contact Form */}
