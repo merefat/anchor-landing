@@ -19,7 +19,7 @@ const steps = [
   },
   {
     num: '03',
-    title: 'AI Organize',
+    title: 'AI Organise',
     desc: 'Anchor builds your optimal day, adjusts when life happens, and keeps every part in sync.',
     color: '#1ebbd4',
   },

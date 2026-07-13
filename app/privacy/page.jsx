@@ -31,7 +31,7 @@ export default function PrivacyPolicy() {
             <li><strong>Identity & Contact Data:</strong> Email address, first and last name (retrieved solely via secure Single Sign-On using Apple or Google Authentication).</li>
             <li><strong>Profile Data (Optional):</strong> Profile photographs and display names, provided strictly at your discretion.</li>
             <li><strong>Location Data:</strong> GPS and IP-based location data processed via the Google Maps API. This is collected to ensure accurate, location-aware scheduling, timezone synchronization, and timely routine prompts.</li>
-            <li><strong>Behavioral & App Usage Data:</strong> Interactions with the app, habit inputs, and task completion logs.</li>
+            <li><strong>Behavioural & App Usage Data:</strong> Interactions with the app, habit inputs, and task completion logs.</li>
             <li><strong>Financial Data:</strong> Premium ("Freemium") subscription status and billing history. Payment processing is handled exclusively by Stripe; ClickBit does not collect, process, or store raw credit card numbers.</li>
           </ul>
 
@@ -39,16 +39,16 @@ export default function PrivacyPolicy() {
           <p className="mb-4">We use your personal information for the primary purpose for which it was collected, including:</p>
           <ul className="list-disc pl-6 mb-4 space-y-2">
             <li>Establishing and managing your individual or Family Account (up to 4 members).</li>
-            <li>Delivering personalized routine and financial habit tracking.</li>
+            <li>Delivering personalised routine and financial habit tracking.</li>
             <li>Processing subscription payments securely.</li>
           </ul>
           <p className="mb-4">We will not use or disclose your personal information for a secondary purpose unless you have consented, or the secondary use is permitted under the Privacy Act.</p>
 
           <h2 className="text-2xl font-semibold text-anchor-text mt-8 mb-4">4. Automated Decision-Making & Artificial Intelligence (APP 1.7 & APP 1.8)</h2>
-          <p className="mb-4">Anchor integrates an artificial intelligence agent (powered by the MiniMax model) to support and optimize daily routines.</p>
+          <p className="mb-4">Anchor integrates an artificial intelligence agent (powered by the MiniMax model) to support and optimise daily routines.</p>
           <ul className="list-disc pl-6 mb-4 space-y-2">
-            <li><strong>Data Processing:</strong> The AI processes pseudonymized behavioral data, logged habits, and app interaction frequencies to suggest workflow and routine optimizations.</li>
-            <li><strong>Limitation of Effect (Advisory Only):</strong> Anchor's automated systems do not make decisions that produce legal effects or similarly significantly affect users. All AI-generated financial habit optimizations and routine adjustments are strictly advisory. Users maintain absolute discretion and manual override capability over all suggestions.</li>
+            <li><strong>Data Processing:</strong> The AI processes pseudonymised behavioural data, logged habits, and app interaction frequencies to suggest workflow and routine optimisations.</li>
+            <li><strong>Limitation of Effect (Advisory Only):</strong> Anchor's automated systems do not make decisions that produce legal effects or similarly significantly affect users. All AI-generated financial habit optimisations and routine adjustments are strictly advisory. Users maintain absolute discretion and manual override capability over all suggestions.</li>
             <li><strong>Opt-Out:</strong> You may disable AI-driven suggestions within the Anchor settings menu at any time.</li>
           </ul>
 

@@ -38,7 +38,7 @@ export default function SeeItInAction() {
     },
     {
       num: '05',
-      title: 'Let AI Organize',
+      title: 'Let AI Organise',
       desc: 'Watch Anchor build your optimal day and adjust when life happens.',
       icon: Sparkles,
     },

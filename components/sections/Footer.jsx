@@ -33,7 +33,7 @@ export default function Footer() {
             </div>
             <p className="text-sm text-anchor-text-muted max-w-md">
               Everything that grounds your day, in one place. Plan, budget, and build
-              habits — organized by AI.
+              habits — organised by AI.
             </p>
 
             {/* Contact Information */}

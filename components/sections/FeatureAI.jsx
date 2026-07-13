@@ -250,7 +250,7 @@ export default function FeatureAI() {
             <Badge color="amber" className="mb-4">AI Assistant</Badge>
             <h2 className="text-3xl md:text-4xl font-bold text-anchor-text tracking-tight">
               Tell it what&apos;s going on.{' '}
-              <span className="text-anchor-amber">It reorganizes the rest.</span>
+              <span className="text-anchor-amber">It reorganises the rest.</span>
             </h2>
             <p className="mt-6 text-lg text-anchor-text-muted">
               Natural language, real changes. No dragging blocks, no recalculating

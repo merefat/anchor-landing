@@ -10,12 +10,12 @@ const inter = Inter({
 export const metadata = {
   title: 'Anchor — Everything that grounds your day, in one place',
   description:
-    'Plan your day, track where your money goes, and build habits that stick — all in one connected system, organized by AI.',
-  keywords: ['productivity', 'planner', 'budget', 'habits', 'AI assistant', 'family organizer'],
+    'Plan your day, track where your money goes, and build habits that stick — all in one connected system, organised by AI.',
+  keywords: ['productivity', 'planner', 'budget', 'habits', 'AI assistant', 'family organiser'],
   openGraph: {
     title: 'Anchor — Everything that grounds your day, in one place',
     description:
-      'Plan your day, track where your money goes, and build habits that stick — all in one connected system, organized by AI.',
+      'Plan your day, track where your money goes, and build habits that stick — all in one connected system, organised by AI.',
     type: 'website',
   },
 };

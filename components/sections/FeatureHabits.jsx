@@ -96,7 +96,7 @@ export default function FeatureHabits() {
             </ul>
           </motion.div>
 
-          {/* Right: Chain visualization */}
+          {/* Right: Chain visualisation */}
           <motion.div
             ref={parallaxRef}
             initial={{ opacity: 0, scale: 0.9 }}
