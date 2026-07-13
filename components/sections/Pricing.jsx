@@ -7,34 +7,14 @@ import Badge from '@/components/ui/Badge';
 import Glass from '@/components/ui/Glass';
 import { registerGsapPlugins, gsap, ScrollTrigger } from '@/lib/gsap-plugins';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
+import { Unlock } from 'lucide-react';
 
-const PER_MEMBER_PRICE = 10;
-const BASE_PRO_PRICE = 10;
+const PERSONAL_PRICE = 6.99;
+const FAMILY_PRICE = 12.99;
 
 export default function Pricing() {
-  const [familySize, setFamilySize] = useState(1);
-  const [displayTotal, setDisplayTotal] = useState(0);
   const sectionRef = useRef(null);
   const reducedMotion = useReducedMotion();
-  const targetTotal = BASE_PRO_PRICE + (familySize > 1 ? (familySize - 1) * PER_MEMBER_PRICE : 0);
-
-  useEffect(() => {
-    if (reducedMotion) {
-      setDisplayTotal(targetTotal);
-      return;
-    }
-    registerGsapPlugins();
-
-    let obj = { val: displayTotal };
-    const tween = gsap.to(obj, {
-      val: targetTotal,
-      duration: 0.6,
-      ease: 'power2.out',
-      onUpdate: () => setDisplayTotal(Math.round(obj.val)),
-    });
-
-    return () => tween.kill();
-  }, [targetTotal, reducedMotion]);
 
   return (
     <section ref={sectionRef} id="pricing" className="relative py-32 overflow-hidden cyber-grid scanlines" style={{ background: 'var(--anchor-base)' }}>
@@ -50,108 +30,98 @@ export default function Pricing() {
           transition={{ duration: 0.7 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-5xl font-bold tracking-tight">
-            <span className="neon-text-teal">Initialize</span>
-            <span className="neon-text-amber"> Your System</span>
+          <h2 className="text-3xl md:text-5xl font-bold tracking-tight flex items-center justify-center gap-3">
+            <Unlock className="w-8 h-8 md:w-10 md:h-10" style={{ color: 'var(--anchor-teal)' }} />
+            Unlock Your Full Potential
           </h2>
           <p className="mt-6 text-lg max-w-2xl mx-auto" style={{ color: 'var(--anchor-text-muted)' }}>
-            Start solo. Scale with your neural network. No hidden protocols.
+            Choose the plan that's right for you.
           </p>
         </motion.div>
 
-        {/* Family size stepper */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="flex items-center justify-center gap-6 mb-12"
-        >
-          <span className="text-sm" style={{ color: 'var(--anchor-text-muted)' }}>Network Size</span>
-          <div className="glass-neon flex items-center gap-3 rounded-full px-2 py-2 neon-border-teal">
-            <button
-              onClick={() => setFamilySize(Math.max(1, familySize - 1))}
-              className="w-8 h-8 rounded-full flex items-center justify-center transition-colors"
-              style={{ background: 'var(--cyber-mid)', color: 'var(--anchor-text)' }}
-              aria-label="Decrease"
-            >
-              −
-            </button>
-            <span className="text-lg font-semibold w-8 text-center" style={{ color: 'var(--anchor-text)' }}>{familySize}</span>
-            <button
-              onClick={() => setFamilySize(Math.min(6, familySize + 1))}
-              className="w-8 h-8 rounded-full flex items-center justify-center transition-colors"
-              style={{ background: 'var(--cyber-mid)', color: 'var(--anchor-text)' }}
-              aria-label="Increase"
-            >
-              +
-            </button>
-          </div>
-          <span className="text-sm" style={{ color: 'var(--anchor-text-muted)' }}>
-            {familySize === 1 ? 'Single Node' : `${familySize} Nodes`}
-          </span>
-        </motion.div>
 
         {/* Pricing cards */}
-        <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
           {/* Free card */}
           <PricingCard
-            name="Starter"
+            name="Free"
             price="$0"
-            period="forever"
-            description="Basic protocols for single-node operation."
+            period="Forever"
+            description=""
             features={[
-              { label: 'Daily timeline & planning', included: true },
-              { label: 'Budget tracking (3 categories)', included: true },
-              { label: '3 active habits', included: true },
-              { label: '1 person', included: true },
-              { label: 'AI Assistant', included: false },
-              { label: 'Network sharing', included: false },
-              { label: 'Unlimited categories', included: false },
+              { label: '1 Active Habit', included: true },
+              { label: 'Basic Routines', included: true },
+              { label: 'Limited Insights', included: true },
             ]}
-            cta="Initialize"
+            cta="Current Plan"
             ctaVariant="ghost"
             color="#1ebbd4"
           />
 
-          {/* Premium card */}
+          {/* Personal card */}
           <PricingCard
-            name="Neural Pro"
-            price={`$${displayTotal}`}
+            name="Personal"
+            price={`$${PERSONAL_PRICE}`}
             period="/month"
-            description="Full neural network access with unlimited capabilities."
+            description=""
             recommended
             features={[
-              { label: 'Unlimited timeline & planning', included: true },
-              { label: 'Unlimited budget categories', included: true },
-              { label: 'Unlimited habits', included: true },
-              { label: `${familySize} ${familySize === 1 ? 'node' : 'nodes'}`, included: true },
-              { label: 'Full AI Assistant', included: true },
-              { label: 'Network sharing & sync', included: true },
-              { label: 'Priority support', included: true },
+              { label: 'Unlimited Habits', included: true },
+              { label: 'Advanced Insights', included: true },
+              { label: 'Budget Tools', included: true },
+              { label: 'Priority Support', included: true },
             ]}
-            cta="Activate Trial"
+            cta="Start Free Trial"
             ctaVariant="gradient"
-            priceNote={
-              familySize > 1
-                ? `$${PER_MEMBER_PRICE}/mo per additional node`
-                : 'Base protocol for 1 node'
-            }
+            color="#f89c11"
+          />
+
+          {/* Family card */}
+          <PricingCard
+            name="Family"
+            price={`$${FAMILY_PRICE}`}
+            period="/month"
+            description=""
+            features={[
+              { label: 'Everything in Personal', included: true },
+              { label: 'Family Collaboration', included: true },
+              { label: 'Shared Schedules', included: true },
+              { label: 'Family Insights', included: true },
+            ]}
+            cta="Start Free Trial"
+            ctaVariant="gradient"
             color="#f89c11"
           />
         </div>
 
-        {/* Note */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+        {/* Trust badges */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.4 }}
-          className="text-center mt-8 text-xs"
-          style={{ color: 'var(--anchor-text-muted)' }}
+          transition={{ delay: 0.5 }}
+          className="flex flex-wrap items-center justify-center gap-6 mt-8"
         >
-          Credits in USD. Terminate anytime. No credit required for starter tier.
-        </motion.p>
+          {[
+            'Restore Purchases',
+            '7-Day Free Trial',
+            'Cancel Anytime',
+            'Secure Payment',
+          ].map((badge, i) => (
+            <div
+              key={i}
+              className="flex items-center gap-2 text-sm"
+              style={{ color: 'var(--anchor-text-muted)' }}
+            >
+              <div className="w-4 h-4 rounded-full flex items-center justify-center" style={{ background: 'var(--anchor-teal)20' }}>
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                  <path d="M2 5l2 2 4-4" stroke="#1ebbd4" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </div>
+              {badge}
+            </div>
+          ))}
+        </motion.div>
       </div>
     </section>
   );
@@ -217,7 +187,7 @@ const PricingCard = memo(function PricingCard({ name, price, period, description
           </div>
         )}
 
-        <div className="mb-6">
+        <div className="mb-6 pt-4">
           <h3 className="text-xl font-semibold" style={{ color: 'var(--anchor-text)' }}>{name}</h3>
           <p className="text-sm mt-1" style={{ color: 'var(--anchor-text-muted)' }}>{description}</p>
         </div>

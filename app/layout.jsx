@@ -26,7 +26,7 @@ export default function RootLayout({ children }) {
       <head>
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem('anchor-theme');if(t==='light'||t==='dark'){document.documentElement.setAttribute('data-theme',t);}else{document.documentElement.setAttribute('data-theme','dark');}}catch(e){}})();`,
+            __html: `(function(){try{var t=localStorage.getItem('anchor-theme');if(t==='light'||t==='dark'){document.documentElement.setAttribute('data-theme',t);}else{var h=new Date().getHours();var auto=(h>=6&&h<18)?'light':'dark';document.documentElement.setAttribute('data-theme',auto);}}catch(e){}})();`,
           }}
         />
       </head>

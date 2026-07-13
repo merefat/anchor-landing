@@ -8,13 +8,37 @@ export default function ThemeToggle({ className = '' }) {
   const [mounted, setMounted] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
+  const getTimeBasedTheme = () => {
+    const hour = new Date().getHours();
+    return (hour >= 6 && hour < 18) ? 'light' : 'dark';
+  };
+
+  const isAutoMode = typeof window !== 'undefined' && !localStorage.getItem('anchor-theme');
+
   useEffect(() => {
     setMounted(true);
     const saved = typeof window !== 'undefined' ? localStorage.getItem('anchor-theme') : null;
     if (saved === 'light' || saved === 'dark') {
       setTheme(saved);
+    } else {
+      setTheme(getTimeBasedTheme());
     }
   }, []);
+
+  useEffect(() => {
+    if (!isAutoMode) return;
+
+    const interval = setInterval(() => {
+      const autoTheme = getTimeBasedTheme();
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      if (currentTheme !== autoTheme) {
+        setTheme(autoTheme);
+        document.documentElement.setAttribute('data-theme', autoTheme);
+      }
+    }, 15 * 60 * 1000); // Check every 15 minutes
+
+    return () => clearInterval(interval);
+  }, [isAutoMode]);
 
   const setThemeMode = (mode) => {
     setTheme(mode);
@@ -23,10 +47,12 @@ export default function ThemeToggle({ className = '' }) {
     setIsOpen(false);
   };
 
-  const setSystemTheme = () => {
-    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    setThemeMode(systemTheme);
+  const setAutoTheme = () => {
+    const autoTheme = getTimeBasedTheme();
+    setTheme(autoTheme);
+    document.documentElement.setAttribute('data-theme', autoTheme);
     localStorage.removeItem('anchor-theme');
+    setIsOpen(false);
   };
 
   return (
@@ -42,7 +68,7 @@ export default function ThemeToggle({ className = '' }) {
           <line x1="8" y1="21" x2="16" y2="21" />
           <line x1="12" y1="17" x2="12" y2="21" />
         </svg>
-        <span className="text-sm text-anchor-text-muted">System</span>
+        <span className="text-sm text-anchor-text-muted">{isAutoMode ? 'Auto' : theme === 'light' ? 'Light' : 'Dark'}</span>
       </button>
 
       {/* Dropdown menu */}
@@ -82,7 +108,7 @@ export default function ThemeToggle({ className = '' }) {
               Dark Mode
             </button>
             <button
-              onClick={setSystemTheme}
+              onClick={setAutoTheme}
               className="w-full flex items-center gap-3 px-4 py-3 text-sm text-anchor-text-muted hover:text-anchor-text hover:bg-anchor-border/50 transition-colors"
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-anchor-teal">
@@ -90,7 +116,7 @@ export default function ThemeToggle({ className = '' }) {
                 <line x1="8" y1="21" x2="16" y2="21" />
                 <line x1="12" y1="17" x2="12" y2="21" />
               </svg>
-              System
+              Auto
             </button>
           </motion.div>
         )}
