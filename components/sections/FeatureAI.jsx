@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic';
 import Badge from '@/components/ui/Badge';
 import Glass from '@/components/ui/Glass';
 import ErrorBoundary from '@/components/ui/ErrorBoundary';
+import AnchorLogo from '@/components/ui/AnchorLogo';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 import { useTilt, useParallax } from '@/hooks/useParallax';
 import { RotateCcw, Send } from 'lucide-react';
@@ -293,7 +294,7 @@ export default function FeatureAI() {
               {/* Chat header with replay button */}
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 relative">
-                  <div className="w-full h-full rounded-full gradient-bg animate-pulse-glow" />
+                  <AnchorLogo size={40} />
                 </div>
                 <div className="flex-1">
                   <div className="text-sm font-semibold text-anchor-text">Anchor AI</div>
